@@ -35,12 +35,12 @@ const toData = [
 ];
 
 const renderToDoList = () => {
-  const markUp = toData
-    .map((toDo) => `
+  toData.forEach((toDo) => {
+    const markUp = `
       <li class="to-do-list--item">
             <div class="to-do-list">
               <input type="checkbox" />
-              <p>${toDo.description} ${toDo.index}</p>
+              <p>${toDo.description}</p>
             </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -59,9 +59,9 @@ const renderToDoList = () => {
               />
             </svg>
           </li>
-      `)
-    .join('');
-  toDoContainer.insertAdjacentHTML('afterbegin', markUp);
+      `;
+    toDoContainer.insertAdjacentHTML('afterbegin', markUp);
+  });
 };
 
 renderToDoList();
