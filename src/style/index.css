@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 html {
   font-size: 62.5%;
   font-family: 'Lato', sans-serif;
@@ -15,12 +16,14 @@ html {
   justify-content: center;
   align-items: center;
 }
+
 h3 {
   margin: 0;
   font-size: 2rem;
   font-weight: 600;
   padding: 1rem 0.5rem;
 }
+
 .to-do-container {
   width: 50rem;
   box-shadow: 0.1px 0.5rem 1rem 1rem rgba(0, 0, 0, 0.1);
@@ -67,6 +70,7 @@ h3 {
   align-items: center;
   padding: 0 1rem;
 }
+
 .to-do-clear-btn {
   border-bottom: 0.1px solid #b3b3b3;
   height: 4rem;

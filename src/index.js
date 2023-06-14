@@ -1,4 +1,5 @@
 import './style/index.css';
+
 const toDoContainer = document.querySelector('.to-do-list--container');
 const toData = [
   {
@@ -35,8 +36,7 @@ const toData = [
 
 const renderToDoList = () => {
   const markUp = toData
-    .map((toDo) => {
-      return `
+    .map((toDo) => `
       <li class="to-do-list--item">
             <div class="to-do-list">
               <input type="checkbox" />
@@ -59,8 +59,7 @@ const renderToDoList = () => {
               />
             </svg>
           </li>
-      `;
-    })
+      `)
     .join('');
   toDoContainer.insertAdjacentHTML('afterbegin', markUp);
 };
