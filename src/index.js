@@ -1,67 +1,25 @@
 import './style/index.css';
+import renderListItem from './renderListItem.js';
+import addNewListItem from './addNewListItem.js';
+import removeListItem from './removeListItem.js';
+// import getLocalStorage from './getLocalStorage.js';
+// import setLocalStorage from './setLocalStorage.js';
+// import { toggle } from './toggleDot.js';
 
-const toDoContainer = document.querySelector('.to-do-list--container');
-const toData = [
-  {
-    description: 'Adding a new item',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Adding a new item',
-    completed: false,
-    index: 2,
-  },
-  {
-    description: 'Adding a new item',
-    completed: false,
-    index: 3,
-  },
-  {
-    description: 'Adding a new item',
-    completed: false,
-    index: 4,
-  },
-  {
-    description: 'Adding a new item',
-    completed: false,
-    index: 5,
-  },
-  {
-    description: 'Adding a new item',
-    completed: false,
-    index: 6,
-  },
-];
-
-const renderToDoList = () => {
-  toData.forEach((toDo) => {
-    const markUp = `
-      <li class="to-do-list--item">
-            <div class="to-do-list">
-              <input type="checkbox" />
-              <p>${toDo.description}</p>
-            </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#5f5f5f"
-              viewBox="0 0 24 24"
-              width="24px"
-              height="24px"
-              stroke-width="1.5"
-              stroke=""
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-              />
-            </svg>
-          </li>
-      `;
-    toDoContainer.insertAdjacentHTML('afterbegin', markUp);
-  });
+const init = () => {
+  renderListItem();
 };
+init();
+const binIcon = document.querySelectorAll('.bin-icon');
+// const dotIcon = document.querySelectorAll('.dot-icon');
+const form = document.querySelector('.to-do-form');
 
-renderToDoList();
+// const removeItem = (e) => {
+//   const removeIndex = e.target.closest('div').dataset.toggle;
+//   removeListItem(removeIndex);
+// };
+form.addEventListener('submit', addNewListItem);
+
+binIcon.forEach((btn) => btn.addEventListener('click', removeListItem));
+
+// localStorage.clear();
