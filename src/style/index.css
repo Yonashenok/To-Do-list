@@ -54,12 +54,12 @@ h3 {
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 1.5rem;
+  padding: 1rem 0;
 }
 
 .to-do-list {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
 }
@@ -86,4 +86,32 @@ h3 {
   text-decoration: underline;
   font-size: 1.5rem;
   color: #000;
+}
+
+.editable--text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  width: 47rem;
+  height: 4rem;
+}
+
+.dot-icon,
+.bin-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.dot-icon {
+  background-color: bisque;
+}
+
+.bin-icon {
+  background-color: rebeccapurple;
+}
+
+.hidden {
+  display: none;
 }
