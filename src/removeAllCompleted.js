@@ -1,6 +1,6 @@
-import getLocalStorage from './getLocalStorage';
-import renderListItem from './renderListItem';
-import setLocalStorage from './setLocalStorage';
+import getLocalStorage from './getLocalStorage.js';
+import renderListItem from './renderListItem.js';
+import setLocalStorage from './setLocalStorage.js';
 
 const allRemoveHandler = () => {
   const toData = getLocalStorage();
