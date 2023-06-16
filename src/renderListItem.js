@@ -1,104 +1,88 @@
 import getLocalStorage from './getLocalStorage.js';
 import setLocalStorage from './setLocalStorage.js';
-import binIcon from './asset/img/binIcon.png';
-// import removeListItem from './removeListItem.js';
-// import { toggleIcons, toggle } from './toggleDot.js';
+import removeListItem from './removeListItem.js';
 
 const toDoContainer = document.querySelector('.to-do-list--container');
-const imgElement = document.createElement('img');
 
 const renderListItem = () => {
   const toData = getLocalStorage();
   toDoContainer.innerHTML = '';
-
-  const markUp = toData
-    .map(
-      (toDo) => `
-  <li class="to-do-list--item-${toDo.index} to-do-list--item">
-    <div>
-      <div class="to-do-list-${toDo.index} to-do-list" data-toggle="${
-        toDo.index
-      }" >
-      <div class="editable--text" contenteditable="false">
-      <input type="checkbox" />
-      ${toDo.description[0].toUpperCase() + toDo.description.slice(1)}
-      </div>
-      <div  class="dot-icon-${toDo.index} dot-icon" data-toggle="${toDo.index}">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#5f5f5f"
-          viewBox="0 0 24 24"
-          width="24px"
-          height="24px"
-          stroke-width="1.5"
-          stroke=""
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-          />
-        </svg>
-      </div>
-      <div   class="bin-icon-${toDo.index} hidden bin-icon" data-toggle="${
-        toDo.index
-      }">
-      ${(imgElement.src = binIcon)}
-      </div>
-      </div> 
-    </div>
-      </li>
-      `
-    )
-    .join('');
-  toDoContainer.insertAdjacentHTML('afterbegin', markUp);
-  const listItems = document.querySelectorAll('.editable--text');
-  const dotIcon = document.querySelectorAll('.dot-icon');
-
-  const toggle = (id, state, color) => {
-    document.querySelector(`.bin-icon-${id}`)?.classList.toggle('hidden');
-    document.querySelector(`.dot-icon-${id}`)?.classList.toggle('hidden');
-    document.querySelector(`.to-do-list-${id}`).contentEditable = state;
-    document.querySelector(`.to-do-list--item-${id}`).style.background = color;
-  };
-
-  const toggleIcons = (e) => {
-    const id = e.target.closest('div').dataset.toggle;
-    toggle(id, true, 'bisque');
-  };
-  dotIcon.forEach((btn) => btn.addEventListener('click', toggleIcons));
-
-  listItems.forEach((item) =>
-    item.addEventListener('blur', (e) => {
-      const id = e.target.closest('div').dataset.toggle;
-      const toData = getLocalStorage();
-      const newValue = e.target.closest('div').textContent.trim().toLowerCase();
-      if (toData[id]?.description !== newValue && newValue) {
-        toData[id].description = newValue;
-        setLocalStorage(toData);
-        renderListItem();
+  toData.forEach((toDo) => {
+    const div = document.createElement('div');
+    div.className = 'to-do-list--item';
+    const createInput = (type, className, value, eventListener) => {
+      const input = document.createElement('input');
+      input.type = type;
+      input.className = className;
+      input.value = value;
+      if (eventListener) {
+        input.addEventListener('change', eventListener);
       }
-      toggle(id, false, '');
-    })
-  );
+      return input;
+    };
+    const inputText = createInput('text', 'task', toDo.description, () => {
+      if (inputText.value !== '') {
+        toDo.description = inputText.value;
+        setLocalStorage(toData);
+        inputText.blur();
+      }
+    });
 
-  // const binIcon = document.querySelectorAll('.bin-icon');
-  // binIcon.forEach((btn) => {
-  //   btn.addEventListener('click', (e) => {
-  //     const removeIndex = e.target.closest('div').dataset.toggle;
-  //     const toData = getLocalStorage();
+    const inputCheckBox = createInput('checkbox', 'checkbox', null, () => {
+      inputText.blur();
+      toDo.completed = !toDo.completed;
+      inputText.classList.toggle('checked');
+      setLocalStorage(toData);
+    });
+    inputCheckBox.checked = toDo.completed;
 
-  //     const newData = toData.filter((item) => item.index !== +removeIndex);
-  //     for (let i = 0; i < newData.length; i += 1) {
-  //       newData[i].index = i;
-  //     }
-  //     console.log('remove', newData);
-  //     setLocalStorage(newData);
-  //     renderListItem();
-  //     // toggleIcons(e);
-  //     // removeItem(e);
-  //   });
-  // });
+    const createIcon = (className, eventListener) => {
+      const icon = document.createElement('i');
+      icon.className = `fa-solid ${className}`;
+      icon.classList.add('ellipse', 'drag');
+      if (eventListener) {
+        icon.addEventListener('mousedown', eventListener);
+      }
+      return icon;
+    };
+
+    const dotIcon = createIcon('fa-ellipsis-vertical');
+
+    const binIcon = createIcon('fas fa-trash-alt pointer', () => {
+      removeListItem(toDo.index);
+    });
+    binIcon.style.display = 'none';
+
+    const toggleIcons = () => {
+      dotIcon.style.display = 'block';
+      binIcon.style.display = 'none';
+      div.classList.toggle('selected');
+      inputText.classList.toggle('selected');
+    };
+
+    inputText.addEventListener('blur', toggleIcons);
+    inputText.addEventListener('focus', () => {
+      div.classList.toggle('selected');
+      inputText.classList.toggle('selected');
+      dotIcon.style.display = 'none';
+      binIcon.style.display = 'block';
+    });
+    inputText.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && inputText.value !== '') {
+        toDo.description = inputText.value;
+        setLocalStorage(toData);
+        inputText.blur();
+      }
+    });
+    div.addEventListener('click', () => {
+      inputText.focus();
+    });
+
+    div.appendChild(inputCheckBox);
+    div.appendChild(inputText);
+    div.appendChild(dotIcon);
+    div.appendChild(binIcon);
+    toDoContainer.appendChild(div);
+  });
 };
 export default renderListItem;
