@@ -51,17 +51,18 @@ h3 {
   border-bottom: 0.1px solid #b3b3b3;
   height: 4rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 0;
 }
 
-.to-do-list {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
+.checked {
+  text-decoration: line-through;
+}
+
+.selected {
+  background-color: rgb(255, 248, 176);
 }
 
 .flex-row {
@@ -69,6 +70,33 @@ h3 {
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
+}
+
+.checkbox {
+  margin-inline: 16px;
+  border: 2px solid rgb(134, 130, 130);
+  width: auto;
+  transform: scale(1.6);
+  cursor: pointer;
+}
+
+.task {
+  width: 85%;
+  height: 90%;
+  border: none;
+  font-size: 16px;
+}
+
+.task:focus {
+  outline: none;
+}
+
+.task:hover {
+  cursor: default;
+}
+
+.item i {
+  cursor: move;
 }
 
 .to-do-clear-btn {
@@ -86,32 +114,4 @@ h3 {
   text-decoration: underline;
   font-size: 1.5rem;
   color: #000;
-}
-
-.editable--text {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0 1rem;
-  width: 47rem;
-  height: 4rem;
-}
-
-.dot-icon,
-.bin-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.dot-icon {
-  background-color: bisque;
-}
-
-.bin-icon {
-  background-color: rebeccapurple;
-}
-
-.hidden {
-  display: none;
 }
