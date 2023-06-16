@@ -50,6 +50,7 @@ const renderListItem = () => {
 
     const binIcon = createIcon('fas fa-trash-alt pointer', () => {
       removeListItem(toDo.index);
+      renderListItem();
     });
     binIcon.style.display = 'none';
 
