@@ -6,7 +6,9 @@ const toDoContainer = document.querySelector('.to-do-list--container');
 
 const renderListItem = () => {
   const toData = getLocalStorage();
+
   toDoContainer.innerHTML = '';
+
   toData.forEach((toDo) => {
     const div = document.createElement('div');
     div.className = 'to-do-list--item';
