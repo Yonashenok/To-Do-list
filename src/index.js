@@ -1,7 +1,7 @@
 import './style/index.css';
 import renderListItem from './renderListItem.js';
 import addNewListItem from './addNewListItem.js';
-import allRemoveHandler from './removeAllCompleted.js';
+import removeHandler from './removeHandler.js';
 
 const init = () => {
   renderListItem();
@@ -11,4 +11,7 @@ const form = document.querySelector('.to-do-form');
 const removeBtn = document.querySelector('.to-do--btn');
 
 form.addEventListener('submit', addNewListItem);
-removeBtn.addEventListener('click', allRemoveHandler);
+removeBtn.addEventListener('click', () => {
+  removeHandler(null);
+  renderListItem();
+});

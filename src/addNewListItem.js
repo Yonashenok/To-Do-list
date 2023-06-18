@@ -10,7 +10,7 @@ const addNewListItem = (e) => {
   toData.push({
     description: newList.value,
     completed: false,
-    index: toData.length,
+    index: toData.length + 1,
   });
   newList.value = '';
   setLocalStorage(toData);
