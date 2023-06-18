@@ -1,6 +1,9 @@
 import getLocalStorage from './getLocalStorage.js';
 import setLocalStorage from './setLocalStorage.js';
-import removeListItem from './removeListItem.js';
+import removeHandler from './removeHandler.js';
+import createInput from './createInput.js';
+import createIcon from './createIcon.js';
+import dragDrop from './dragDrop.js';
 
 const toDoContainer = document.querySelector('.to-do-list--container');
 
@@ -12,16 +15,8 @@ const renderListItem = () => {
   toData.forEach((toDo) => {
     const div = document.createElement('div');
     div.className = 'to-do-list--item';
-    const createInput = (type, className, value, eventListener) => {
-      const input = document.createElement('input');
-      input.type = type;
-      input.className = className;
-      input.value = value;
-      if (eventListener) {
-        input.addEventListener('change', eventListener);
-      }
-      return input;
-    };
+    div.draggable = true;
+
     const inputText = createInput('text', 'task', toDo.description, () => {
       if (inputText.value !== '') {
         toDo.description = inputText.value;
@@ -38,20 +33,10 @@ const renderListItem = () => {
     });
     inputCheckBox.checked = toDo.completed;
 
-    const createIcon = (className, eventListener) => {
-      const icon = document.createElement('i');
-      icon.className = `fa-solid ${className}`;
-      icon.classList.add('ellipse', 'drag');
-      if (eventListener) {
-        icon.addEventListener('mousedown', eventListener);
-      }
-      return icon;
-    };
-
     const dotIcon = createIcon('fa-ellipsis-vertical');
 
     const binIcon = createIcon('fas fa-trash-alt pointer', () => {
-      removeListItem(toDo.index);
+      removeHandler(toDo.index);
       renderListItem();
     });
     binIcon.style.display = 'none';
@@ -77,6 +62,29 @@ const renderListItem = () => {
         inputText.blur();
       }
     });
+
+    div.addEventListener('dragstart', () => {
+      div.classList.add('dragging');
+      inputText.classList.add('dragging');
+      inputText.blur();
+    });
+    div.addEventListener('dragend', () => {
+      div.classList.remove('dragging');
+      inputText.classList.remove('dragging');
+      inputText.blur();
+    });
+
+    toDoContainer.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      const draggable = document.querySelector('.dragging');
+      const afterElement = dragDrop(e.clientY);
+      if (afterElement === null) {
+        toDoContainer.appendChild(draggable);
+      } else {
+        toDoContainer.insertBefore(draggable, afterElement);
+      }
+    });
+
     div.addEventListener('click', () => {
       inputText.focus();
     });
