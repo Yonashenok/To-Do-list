@@ -55,6 +55,7 @@ h3 {
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 0;
+  cursor: pointer;
 }
 
 .checked {
@@ -114,4 +115,9 @@ h3 {
   text-decoration: underline;
   font-size: 1.5rem;
   color: #000;
+}
+
+.dragging {
+  opacity: 1;
+  background: bisque;
 }
