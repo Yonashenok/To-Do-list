@@ -15,7 +15,7 @@ const dragDrop = (y) => {
     },
     {
       offset: Number.NEGATIVE_INFINITY,
-    }
+    },
   ).element;
 };
 
