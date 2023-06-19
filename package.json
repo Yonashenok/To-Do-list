@@ -22,6 +22,7 @@
     "file-loader": "^6.2.0",
     "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.3",
+    "sass": "^1.63.4",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",
     "stylelint": "^13.13.1",
