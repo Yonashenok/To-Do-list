@@ -2,11 +2,10 @@ import getLocalStorage from './getLocalStorage.js';
 import setLocalStorage from './setLocalStorage.js';
 import renderListItem from './renderListItem.js';
 
-const addNewListItem = (e, newValue) => {
-  e.preventDefault();
+const addNewListItem = (newItem) => {
   const toData = getLocalStorage();
   toData.push({
-    description: newValue,
+    description: newItem.description,
     completed: false,
     index: toData.length + 1,
   });
