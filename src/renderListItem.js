@@ -33,12 +33,17 @@ const renderListItem = () => {
     });
     inputCheckBox.checked = toDo.completed;
 
-    const dotIcon = createIcon('fa-ellipsis-vertical');
+    const dotIcon = createIcon('fa-ellipsis-vertical fa-xl');
+    dotIcon.style = 'color: #913af6';
 
-    const binIcon = createIcon('fas fa-trash-alt pointer', () => {
-      removeHandler(toDo.index);
-      renderListItem();
-    });
+    const binIcon = createIcon(
+      'fa-solid fa-xmark fa-beat-fade fa-xl pointer',
+      () => {
+        removeHandler(toDo.index);
+        renderListItem();
+      }
+    );
+    binIcon.style = 'color: #913afe;';
     binIcon.style.display = 'none';
 
     const toggleIcons = () => {
