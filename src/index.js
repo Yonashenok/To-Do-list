@@ -13,9 +13,10 @@ const removeBtn = document.querySelector('.to-do--btn');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const newListValue = document.querySelector('.to-do-form--input').value;
-  const newItem = { description: newListValue };
+  const newListValue = document.querySelector('.to-do-form--input');
+  const newItem = { description: newListValue.value };
   addNewListItem(newItem);
+  newListValue.value = '';
 });
 
 removeBtn.addEventListener('click', () => {
