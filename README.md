@@ -61,7 +61,7 @@ After you're finished please remove all the comments and instructions!
 
 # 📖 [To-Do-List] <a name="about-project"></a>
 
-**[Awesome books]** is a website for recording your favorite books title with respective author name.
+**[To-Do-List]** is a website for recording your day today task with different feature.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -74,9 +74,11 @@ After you're finished please remove all the comments and instructions!
 
 ### Key Features <a name="key-features"></a>
 
+- **[Testing coverage of AddItem and Delete Item]**
 - **[Adding a new item]**
 - **[Removing a selected item]**
 - **[Marking a selected item as complete]**
+- **[Drag and Drop List Item]**
 - **[Removing all items marked as complete at once]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -133,12 +135,18 @@ To run the project, execute the following command:
 
 ### Run tests
 
-To run tests, run the following command:
+To run tests on linters, run the following command:
 
 ```sh
   npx stylelint "**/*.{css,scss}"
   npx hint .
   npx eslint .
+```
+
+To run test coverages, run the following command:
+
+```sh
+  npm test
 ```
 
 ### Deployment
@@ -163,6 +171,11 @@ You can deploy this project using:
 - Twitter: [@yonashenok](https://twitter.com/YonasHenok3)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/yonas-henok-996a26217)
 
+👤 **Riley Manda**
+
+- GitHub: [@RileyManda](https://github.com/RileyManda)
+- Twitter: [@rilecodez](https://twitter.com/rilecodez)
+- LinkedIn: [rileymanda](https://www.linkedin.com/in/rileymanda/)
   >
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

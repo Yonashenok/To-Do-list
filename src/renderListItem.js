@@ -1,9 +1,13 @@
 import getLocalStorage from './getLocalStorage.js';
 import setLocalStorage from './setLocalStorage.js';
+import checkedListItem from './checkedListItem.js';
 import removeHandler from './removeHandler.js';
+import editListItem from './editListItem.js';
 import createInput from './createInput.js';
 import createIcon from './createIcon.js';
 import dragDrop from './dragDrop.js';
+import checked from './checked.js';
+import edit from './edit.js';
 
 const allCont = document.querySelector('.to-do-list--container');
 const uncompletedCont = document.querySelector('.to-do-uncompleted--container');
@@ -27,8 +31,8 @@ const renderListItem = (toData, toDoContainer) => {
 
     const inputCheckBox = createInput('checkbox', 'checkbox', null, () => {
       inputText.blur();
-      toDo.completed = !toDo.completed;
       inputText.classList.toggle('checked');
+      toDo.completed = checkedListItem(checked, toDo.completed);
       setLocalStorage(toData);
       const Data = getLocalStorage();
       const uncompleted = Data.filter((item) => item.completed !== true);
@@ -72,8 +76,8 @@ const renderListItem = (toData, toDoContainer) => {
     });
     inputText.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && inputText.value !== '') {
-        toDo.description = inputText.value;
-        setLocalStorage(toData);
+        const inputTextValue = inputText.value;
+        toDo.description = editListItem(edit, inputTextValue);
         inputText.blur();
       }
     });

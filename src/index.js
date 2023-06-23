@@ -14,6 +14,7 @@ const init = () => {
   markUncompleted();
 };
 init();
+
 const form = document.querySelector('.to-do-form');
 const overly = document.querySelector('.overly');
 const removeBtn = document.querySelector('.to-do--btn');
