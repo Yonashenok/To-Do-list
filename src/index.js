@@ -6,12 +6,15 @@ import removeHandler from './removeHandler.js';
 import markUncompleted from './markUncompleted.js';
 
 const allCont = document.querySelector('.to-do-list--container');
+const completedCont = document.querySelector('.to-do-completed--container');
 
 const init = () => {
   const toData = getLocalStorage();
 
   renderListItem(toData, allCont);
   markUncompleted();
+  const completed = toData.filter((item) => item.completed === true);
+  renderListItem(completed, completedCont);
 };
 init();
 

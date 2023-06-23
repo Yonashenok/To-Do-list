@@ -41,6 +41,7 @@ const renderListItem = (toData, toDoContainer) => {
       renderListItem(uncompleted, uncompletedCont);
     });
     inputCheckBox.checked = toDo.completed;
+    if (inputCheckBox.checked) inputText.classList.add('checked');
 
     const dotIcon = createIcon('fa-ellipsis-vertical fa-xl');
     dotIcon.style = 'color: #913af6';
@@ -55,7 +56,7 @@ const renderListItem = (toData, toDoContainer) => {
         const completed = Data.filter((item) => item.completed === true);
         renderListItem(uncompleted, uncompletedCont);
         renderListItem(completed, completedCont);
-      },
+      }
     );
     binIcon.style = 'color: #913afe;';
     binIcon.style.display = 'none';
