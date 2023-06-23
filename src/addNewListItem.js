@@ -10,10 +10,11 @@ const addNewListItem = (e) => {
   e.preventDefault();
   const toData = getLocalStorage();
   toData.push({
-    description: newItem.description,
+    description: newList.value,
     completed: false,
     index: toData.length + 1,
   });
+  newList.value = '';
   setLocalStorage(toData);
   renderListItem(toData, allCont);
   markUncompleted();
