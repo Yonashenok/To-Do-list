@@ -14,47 +14,36 @@
       <div class="to-do-container">
         <div class="flex-row">
           <h3>Todays To Do</h3>
-          <i
-            class="fa-sharp fa-solid fa-circle-dot fa-fade fa-2xl"
-            style="color: #913af6"
-          ></i>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            width="24px"
+            height="24px"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#5f5f5f"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+            />
+          </svg>
         </div>
-        <ul class="to-do-nav">
-          <li class="to-do-nav-link"><a href="#all">All</a></li>
-          <li class="to-do-nav-link"><a href="#completed">Completed</a></li>
-          <li class="to-do-nav-link"><a href="#uncompleted">Uncompleted</a></li>
-        </ul>
-        <section
-          id="all"
-          class="to-do-list--container to-do-all--container"
-        ></section>
-        <section id="completed" class="to-do-completed--container"></section>
-        <section
-          id="uncompleted"
-          class="to-do-uncompleted--container"
-        ></section>
-        <div class="to-do-clear-btn">
-          <a class="create-to-btn" href="#all">+ Create Task</a>
-        </div>
-        <div class="to-do-clear-btn hidden">
-          <a class="to-do--btn" href="#">Clear all completed</a>
-        </div>
-      </div>
-    </section>
-    <div class="overly hidden">
-      <div class="btn-close">
-        <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff"></i>
-      </div>
-      <div class="model">
+
         <form action="" class="to-do-form">
           <input
             class="to-do-form--input"
             type="text"
             placeholder="Add to your list..."
           />
-          <button type="submit" class="btn--submit" href="#">+ Add Task</button>
         </form>
+        <section class="to-do-list--container"></section>
+        <div class="to-do-clear-btn">
+          <a class="to-do--btn" href="#">Clear all completed</a>
+        </div>
       </div>
-    </div>
+    </section>
   </body>
 </html>
