@@ -18,11 +18,13 @@
   justify-content: center;
   align-items: center;
 }
+
 @mixin todo-container {
   font-size: 1.6rem;
   font-weight: 400;
   padding: 2rem;
 }
+
 @mixin flex-start {
   display: flex;
   justify-content: start;
@@ -46,18 +48,25 @@ html {
   align-items: center;
 }
 
+.time-date {
+  margin-left: 1.6rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #913af6;
+}
+
 h3 {
   margin: 0;
   font-size: 2rem;
   font-weight: 600;
   padding: 1rem 0.5rem;
-  color: #1b2056;
+  color: #913af6;
 }
 
 .to-do-container {
   width: 50rem;
   box-shadow: 0.1px 0.5rem 0.5rem 0.6rem rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  padding: 3rem;
   border-radius: 2rem;
   background-color: #e1e6ee;
   border: 1px solid #999;
@@ -130,7 +139,9 @@ h3 {
 
 .to-do-clear-btn {
   height: 4rem;
+
   @include flex;
+
   padding: 1rem 0;
   background-color: #e1e6ee;
   color: #5f5f5f;
@@ -138,11 +149,14 @@ h3 {
 
 .to-do--btn {
   padding: 1.5rem 4rem;
+
   @include btn(#fff, #913af6);
 }
 
 .create-to-btn {
+  margin-top: 2.5rem;
   padding: 1.5rem 4rem;
+
   @include btn(#913af6, #fff);
 }
 
@@ -169,11 +183,13 @@ h3 {
 
   .model {
     @include flex;
+
     width: 100%;
     height: 100%;
 
     .to-do-form {
       @include flex;
+
       flex-direction: column;
       gap: 5rem;
 
@@ -190,30 +206,41 @@ h3 {
     .btn--submit {
       padding: 0.8rem 1.5rem;
       border: none;
+
       @include btn(#fff, #913af6);
     }
   }
 }
+
 .to-do-nav {
   @include flex-start;
+
   gap: 1rem;
+  margin: 2rem 2rem;
   font-size: 1.6rem;
   font-weight: 600;
-  li {
-    list-style: none;
-    a {
-      text-decoration: none;
-      color: #1b2056;
-    }
+}
+
+.to-do-nav-link {
+  list-style: none;
+
+  & a {
+    text-decoration: none;
+    color: #8488ac;
   }
 }
+
+.OnClickLink a {
+  color: #913af6;
+  border-bottom: 2px solid #913af6;
+}
+
 .to-do-completed--container {
   @include todo-container();
-  background-color: greenyellow;
 }
+
 .to-do-uncompleted--container {
   @include todo-container();
-  background-color: red;
 }
 
 .to-do-all--container,
@@ -221,6 +248,7 @@ h3 {
 .to-do-uncompleted--container {
   display: none;
 }
+
 .to-do-all--container:target,
 .to-do-completed--container:target,
 .to-do-uncompleted--container:target {
