@@ -5,11 +5,11 @@ import createInput from './createInput.js';
 import createIcon from './createIcon.js';
 import dragDrop from './dragDrop.js';
 
-const toDoContainer = document.querySelector('.to-do-list--container');
+const allCont = document.querySelector('.to-do-list--container');
+const uncompletedCont = document.querySelector('.to-do-uncompleted--container');
+const completedCont = document.querySelector('.to-do-completed--container');
 
-const renderListItem = () => {
-  const toData = getLocalStorage();
-
+const renderListItem = (toData, toDoContainer) => {
   toDoContainer.innerHTML = '';
 
   toData.forEach((toDo) => {
@@ -30,6 +30,11 @@ const renderListItem = () => {
       toDo.completed = !toDo.completed;
       inputText.classList.toggle('checked');
       setLocalStorage(toData);
+      const Data = getLocalStorage();
+      const uncompleted = Data.filter((item) => item.completed !== true);
+      const completed = Data.filter((item) => item.completed === true);
+      renderListItem(completed, completedCont);
+      renderListItem(uncompleted, uncompletedCont);
     });
     inputCheckBox.checked = toDo.completed;
 
@@ -40,8 +45,13 @@ const renderListItem = () => {
       'fa-solid fa-xmark fa-beat-fade fa-xl pointer',
       () => {
         removeHandler(toDo.index);
-        renderListItem();
-      }
+        const Data = getLocalStorage();
+        renderListItem(Data, allCont);
+        const uncompleted = Data.filter((item) => item.completed !== true);
+        const completed = Data.filter((item) => item.completed === true);
+        renderListItem(uncompleted, uncompletedCont);
+        renderListItem(completed, completedCont);
+      },
     );
     binIcon.style = 'color: #913afe;';
     binIcon.style.display = 'none';
