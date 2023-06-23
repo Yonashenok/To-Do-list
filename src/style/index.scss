@@ -1,0 +1,260 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@mixin btn($col1, $col2) {
+  font-size: 1.5rem;
+  color: $col2;
+  background-color: $col1;
+  box-shadow: 0.1px 0.2rem 0.15rem 0.35rem rgba(178, 118, 228, 0.25);
+  border-radius: 1rem;
+  text-decoration: none;
+}
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin todo-container {
+  font-size: 1.6rem;
+  font-weight: 400;
+  padding: 2rem;
+}
+
+@mixin flex-start {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+body {
+  background-color: #e2d5f0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: 'Lato', sans-serif;
+}
+
+.section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-date {
+  margin-left: 1.6rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #913af6;
+}
+
+h3 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 1rem 0.5rem;
+  color: #913af6;
+}
+
+.to-do-container {
+  width: 50rem;
+  box-shadow: 0.1px 0.5rem 0.5rem 0.6rem rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  border-radius: 2rem;
+  background-color: #e1e6ee;
+  border: 1px solid #999;
+}
+
+.to-do-form--input::placeholder {
+  font-style: italic;
+}
+
+.to-do-list--container {
+  @include todo-container();
+}
+
+.to-do-list--item {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 6.5rem;
+  gap: 0.5rem;
+  padding: 1rem 1rem;
+  margin-bottom: 1.2rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.checked {
+  text-decoration: line-through;
+}
+
+.selected {
+  background-color: #e2d5f0;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.checkbox {
+  margin-inline: 16px;
+  border: 2px solid rgb(134, 130, 130);
+  width: auto;
+  transform: scale(1.6);
+  cursor: pointer;
+}
+
+.task {
+  width: 85%;
+  height: 90%;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1b2056;
+}
+
+.task:focus {
+  outline: none;
+}
+
+.task:hover {
+  cursor: default;
+}
+
+.item i {
+  cursor: move;
+}
+
+.to-do-clear-btn {
+  height: 4rem;
+
+  @include flex;
+
+  padding: 1rem 0;
+  background-color: #e1e6ee;
+  color: #5f5f5f;
+}
+
+.to-do--btn {
+  padding: 1.5rem 4rem;
+
+  @include btn(#fff, #913af6);
+}
+
+.create-to-btn {
+  margin-top: 2.5rem;
+  padding: 1.5rem 4rem;
+
+  @include btn(#913af6, #fff);
+}
+
+.dragging {
+  opacity: 1;
+  background: #e2d5f0;
+}
+
+.overly {
+  width: 30rem;
+  height: 20rem;
+  background-color: rebeccapurple;
+  position: fixed;
+  top: 28%;
+  left: 50%;
+  transform: translate3d(-50%, 50%, 0);
+  border-radius: 2rem;
+
+  .btn-close {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+  }
+
+  .model {
+    @include flex;
+
+    width: 100%;
+    height: 100%;
+
+    .to-do-form {
+      @include flex;
+
+      flex-direction: column;
+      gap: 5rem;
+
+      .to-do-form--input {
+        width: 25rem;
+        height: 4rem;
+        padding-left: 1.5rem;
+        border: none;
+        border-bottom: 1px solid #b3b3b3;
+        border-top: 1px solid #b3b3b3;
+      }
+    }
+
+    .btn--submit {
+      padding: 0.8rem 1.5rem;
+      border: none;
+
+      @include btn(#fff, #913af6);
+    }
+  }
+}
+
+.to-do-nav {
+  @include flex-start;
+
+  gap: 1rem;
+  margin: 2rem 2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.to-do-nav-link {
+  list-style: none;
+
+  & a {
+    text-decoration: none;
+    color: #8488ac;
+  }
+}
+
+.OnClickLink a {
+  color: #913af6;
+  border-bottom: 2px solid #913af6;
+}
+
+.to-do-completed--container {
+  @include todo-container();
+}
+
+.to-do-uncompleted--container {
+  @include todo-container();
+}
+
+.to-do-all--container,
+.to-do-completed--container,
+.to-do-uncompleted--container {
+  display: none;
+}
+
+.to-do-all--container:target,
+.to-do-completed--container:target,
+.to-do-uncompleted--container:target {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

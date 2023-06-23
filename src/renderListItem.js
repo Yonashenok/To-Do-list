@@ -9,11 +9,11 @@ import dragDrop from './dragDrop.js';
 import checked from './checked.js';
 import edit from './edit.js';
 
-const toDoContainer = document.querySelector('.to-do-list--container');
+const allCont = document.querySelector('.to-do-list--container');
+const uncompletedCont = document.querySelector('.to-do-uncompleted--container');
+const completedCont = document.querySelector('.to-do-completed--container');
 
-const renderListItem = () => {
-  const toData = getLocalStorage();
-
+const renderListItem = (toData, toDoContainer) => {
   toDoContainer.innerHTML = '';
 
   toData.forEach((toDo) => {
@@ -34,15 +34,31 @@ const renderListItem = () => {
       inputText.classList.toggle('checked');
       toDo.completed = checkedListItem(checked, toDo.completed);
       setLocalStorage(toData);
+      const Data = getLocalStorage();
+      const uncompleted = Data.filter((item) => item.completed !== true);
+      const completed = Data.filter((item) => item.completed === true);
+      renderListItem(completed, completedCont);
+      renderListItem(uncompleted, uncompletedCont);
     });
     inputCheckBox.checked = toDo.completed;
+    if (inputCheckBox.checked) inputText.classList.add('checked');
 
-    const dotIcon = createIcon('fa-ellipsis-vertical');
+    const dotIcon = createIcon('fa-ellipsis-vertical fa-xl');
+    dotIcon.style = 'color: #913af6';
 
-    const binIcon = createIcon('fas fa-trash-alt pointer', () => {
-      removeHandler(toDo.index);
-      renderListItem();
-    });
+    const binIcon = createIcon(
+      'fa-solid fa-xmark fa-beat-fade fa-xl pointer',
+      () => {
+        removeHandler(toDo.index);
+        const Data = getLocalStorage();
+        renderListItem(Data, allCont);
+        const uncompleted = Data.filter((item) => item.completed !== true);
+        const completed = Data.filter((item) => item.completed === true);
+        renderListItem(uncompleted, uncompletedCont);
+        renderListItem(completed, completedCont);
+      },
+    );
+    binIcon.style = 'color: #913afe;';
     binIcon.style.display = 'none';
 
     const toggleIcons = () => {
