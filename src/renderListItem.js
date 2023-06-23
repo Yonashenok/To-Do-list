@@ -56,7 +56,7 @@ const renderListItem = (toData, toDoContainer) => {
         const completed = Data.filter((item) => item.completed === true);
         renderListItem(uncompleted, uncompletedCont);
         renderListItem(completed, completedCont);
-      }
+      },
     );
     binIcon.style = 'color: #913afe;';
     binIcon.style.display = 'none';
