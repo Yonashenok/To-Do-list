@@ -1,8 +1,10 @@
 import getLocalStorage from './getLocalStorage.js';
 import setLocalStorage from './setLocalStorage.js';
 import renderListItem from './renderListItem.js';
+import markUncompleted from './markUncompleted.js';
 
 const newList = document.querySelector('.to-do-form--input');
+const allCont = document.querySelector('.to-do-list--container');
 
 const addNewListItem = (e) => {
   e.preventDefault();
@@ -14,6 +16,7 @@ const addNewListItem = (e) => {
   });
   newList.value = '';
   setLocalStorage(toData);
-  renderListItem();
+  renderListItem(toData, allCont);
+  markUncompleted();
 };
 export default addNewListItem;
