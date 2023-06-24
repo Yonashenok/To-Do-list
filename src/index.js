@@ -4,6 +4,7 @@ import renderListItem from './renderListItem.js';
 import addNewListItem from './addNewListItem.js';
 import removeHandler from './removeHandler.js';
 import markUncompleted from './markUncompleted.js';
+import markCompleted from './markCompleted.js';
 
 const allCont = document.querySelector('.to-do-list--container');
 const completedCont = document.querySelector('.to-do-completed--container');
@@ -26,6 +27,7 @@ const btnClose = document.querySelector('.btn-close');
 const navLink = document.querySelectorAll('.to-do-nav-link');
 const navContainer = document.querySelector('.to-do-nav');
 const timeDate = document.querySelector('.time-date');
+const btn = document.querySelectorAll('.to-do-clear-btn ');
 createBtn.addEventListener('click', () => {
   overly.classList.toggle('hidden');
 });
@@ -42,16 +44,23 @@ removeBtn.addEventListener('click', () => {
   const toData = getLocalStorage();
   renderListItem(toData, allCont);
   markUncompleted();
+  markCompleted();
 });
 
 navContainer.addEventListener('click', (e) => {
   const clicked = e.target.closest('.to-do-nav-link');
+  const id = e.target.closest('.to-do-nav-link').dataset.show;
   if (!clicked) return;
   navLink.forEach((link) => {
     link.classList.remove('OnClickLink');
   });
+  btn.forEach((btnCon) => {
+    btnCon.classList.add('hidden');
+  });
 
   clicked.classList.add('OnClickLink');
+  if (!id) return;
+  document.querySelector(`.btn-${id}`).classList.remove('hidden');
 });
 
 const setTime = () => {

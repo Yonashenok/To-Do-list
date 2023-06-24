@@ -265,6 +265,7 @@ $media-mobile-sm: 'only screen and (max-width : 480px)';
 @media #{$media-mobile} {
   .to-do-container {
     width: 50rem;
+    padding: 3rem 0.5rem;
   }
 }
 
