@@ -258,3 +258,18 @@ h3 {
 .hidden {
   display: none;
 }
+
+$media-mobile: 'only screen and (max-width : 600px)';
+$media-mobile-sm: 'only screen and (max-width : 480px)';
+
+@media #{$media-mobile} {
+  .to-do-container {
+    width: 50rem;
+  }
+}
+
+@media #{$media-mobile-sm} {
+  .to-do-container {
+    width: 35rem;
+  }
+}
