@@ -16,7 +16,7 @@ const addNewListItem = (e) => {
   });
   newList.value = '';
   setLocalStorage(toData);
-  renderListItem(toData, allCont);
+  renderListItem(toData, allCont, true);
   markUncompleted();
 };
 

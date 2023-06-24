@@ -13,7 +13,7 @@ const allCont = document.querySelector('.to-do-list--container');
 const uncompletedCont = document.querySelector('.to-do-uncompleted--container');
 const completedCont = document.querySelector('.to-do-completed--container');
 
-const renderListItem = (toData, toDoContainer) => {
+const renderListItem = (toData, toDoContainer, state) => {
   toDoContainer.innerHTML = '';
 
   toData.forEach((toDo) => {
@@ -29,18 +29,20 @@ const renderListItem = (toData, toDoContainer) => {
       }
     });
 
-    const inputCheckBox = createInput('checkbox', 'checkbox', null, () => {
-      inputText.blur();
-      inputText.classList.toggle('checked');
-      toDo.completed = checkedListItem(checked, toDo.completed);
-      setLocalStorage(toData);
-      const Data = getLocalStorage();
-      const uncompleted = Data.filter((item) => item.completed !== true);
-      const completed = Data.filter((item) => item.completed === true);
-      renderListItem(completed, completedCont);
-      renderListItem(uncompleted, uncompletedCont);
-    });
-    inputCheckBox.checked = toDo.completed;
+    const inputCheckBox = state
+      ? createInput('checkbox', 'checkbox', null, () => {
+        inputText.blur();
+        inputText.classList.toggle('checked');
+        toDo.completed = checkedListItem(checked, toDo.completed);
+        setLocalStorage(toData);
+        const Data = getLocalStorage();
+        const uncompleted = Data.filter((item) => item.completed !== true);
+        const completed = Data.filter((item) => item.completed === true);
+        renderListItem(completed, completedCont, false);
+        renderListItem(uncompleted, uncompletedCont, false);
+      })
+      : '';
+    if (inputCheckBox) inputCheckBox.checked = toDo.completed;
     if (inputCheckBox.checked) inputText.classList.add('checked');
 
     const dotIcon = createIcon('fa-ellipsis-vertical fa-xl');
@@ -51,11 +53,11 @@ const renderListItem = (toData, toDoContainer) => {
       () => {
         removeHandler(toDo.index);
         const Data = getLocalStorage();
-        renderListItem(Data, allCont);
+        renderListItem(Data, allCont, true);
         const uncompleted = Data.filter((item) => item.completed !== true);
         const completed = Data.filter((item) => item.completed === true);
-        renderListItem(completed, completedCont);
-        renderListItem(uncompleted, uncompletedCont);
+        renderListItem(completed, completedCont, false);
+        renderListItem(uncompleted, uncompletedCont, false);
       },
     );
     binIcon.style = 'color: #913afe;';
@@ -104,12 +106,11 @@ const renderListItem = (toData, toDoContainer) => {
         toDoContainer.insertBefore(draggable, afterElement);
       }
     });
-
     div.addEventListener('click', () => {
       inputText.focus();
     });
 
-    div.appendChild(inputCheckBox);
+    if (inputCheckBox) div.appendChild(inputCheckBox);
     div.appendChild(inputText);
     div.appendChild(dotIcon);
     div.appendChild(binIcon);

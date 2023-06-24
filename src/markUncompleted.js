@@ -6,6 +6,6 @@ const uncompletedCont = document.querySelector('.to-do-uncompleted--container');
 const markUncompleted = () => {
   const toData = getLocalStorage();
   const completed = toData.filter((item) => item.completed !== true);
-  renderListItem(completed, uncompletedCont);
+  renderListItem(completed, uncompletedCont, false);
 };
 export default markUncompleted;

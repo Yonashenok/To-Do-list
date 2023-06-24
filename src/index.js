@@ -12,7 +12,7 @@ const completedCont = document.querySelector('.to-do-completed--container');
 const init = () => {
   const toData = getLocalStorage();
 
-  renderListItem(toData, allCont);
+  renderListItem(toData, allCont, true);
   markUncompleted();
   const completed = toData.filter((item) => item.completed === true);
   renderListItem(completed, completedCont);
@@ -42,15 +42,15 @@ btnClose.addEventListener('click', () => {
 removeBtn.addEventListener('click', () => {
   removeHandler(null);
   const toData = getLocalStorage();
-  renderListItem(toData, allCont);
+  renderListItem(toData, allCont, true);
   markUncompleted();
   markCompleted();
 });
 
 navContainer.addEventListener('click', (e) => {
   const clicked = e.target.closest('.to-do-nav-link');
-  const id = e.target.closest('.to-do-nav-link').dataset.show;
   if (!clicked) return;
+  const id = e.target.closest('.to-do-nav-link').dataset.show;
   navLink.forEach((link) => {
     link.classList.remove('OnClickLink');
   });
